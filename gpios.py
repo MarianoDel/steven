@@ -7,12 +7,19 @@ import time
 ###########################################
 # Seteo Inicial de todos los GPIOs a usar #
 ###########################################
-LED_G = 24
-LED_R = 23
-BUZZER = 25
-SCANNER = 18
-TRASH_UP = 15
-TRASH_DWN = 14
+#LED_G = 24
+#LED_R = 23
+#BUZZER = 25
+#SCANNER = 18
+#TRASH_UP = 15
+#TRASH_DWN = 14
+
+LED_G = 15
+LED_R = 18
+BUZZER = 14
+SCANNER = 25
+TRASH_UP = 24
+TRASH_DWN = 23
 
 def GpiosInit():
     GPIO.setwarnings(False)

@@ -403,6 +403,16 @@ You can put any iwconfig command in this file, in the format wireless_[command] 
 *** Debo bajar la version de Pymongo por problemas de compatibilidad
     pip3 install pymongo==3.4.0
 
+** DONE Paso los scripts a arranque automatico
+   CLOSED: [2019-11-07 Thu 10:37]
+
+*** pongo los llamados en rc.local
+    - uso el & para que corra sin consola
+    /usr/bin/python3 /home/med/Documents/steven/high_level_2.py &
+
+    - paso mongod a daemon los logs en /var/log/mongodb.log
+    /opt/mongo/bin/mongod --journal --fork --logpath
+
 * DOCUMENTACION GENERAL DEL PROYECTO
 
 
