@@ -475,3 +475,18 @@ You can put any iwconfig command in this file, in the format wireless_[command] 
    # lsusb
    Bus 001 Device 008: ID 05fe:1010 Chic Technology Corp. Optical Wireless
 
+
+* ARRANQUE AUTOMATICO en rc.local
+** ultimas lineas de rc.local
+   # Set the system clock/time from hardware clock
+   hwclock -s
+
+   # Run the App
+   /usr/bin/python3 /home/med/Documents/steven/high_level_3.py &
+
+   # corrijo el error de mongod.lock borrando el archivo
+   # /data/db/mongod.lock
+   rm -f /data/db/mongod.lock
+
+   # corro el server de base de datos
+   /opt/mongo/bin/mongod --journal --fork --logpath /var/log/mongodb.log

@@ -52,7 +52,7 @@ def MainLoop():
             print ("No se encontro la Base, verificar si el proceso esta corriendo")
             time.sleep(10)
 
-
+    # print ("Salto la base de datos")
 
     #######################################################
     # Todo levantado me quedo mostrando codigo en consola #
