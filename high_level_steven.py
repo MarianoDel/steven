@@ -4,9 +4,10 @@ import usb.core
 import usb.util
 import pymongo
 from pymongo import MongoClient
-import serial
+# import serial
 import RPi.GPIO as GPIO
 import time
+import gpios as gp
 
 #DATOS DEL BARCODE READER
 VENDOR_ID = 0x05fe

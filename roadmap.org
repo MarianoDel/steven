@@ -411,7 +411,7 @@ You can put any iwconfig command in this file, in the format wireless_[command] 
     /usr/bin/python3 /home/med/Documents/steven/high_level_2.py &
 
     - paso mongod a daemon los logs en /var/log/mongodb.log
-    /opt/mongo/bin/mongod --journal --fork --logpath
+    /opt/mongo/bin/mongod --journal --fork --logpath /var/log/mongodb.log
 
 * DOCUMENTACION GENERAL DEL PROYECTO
 
