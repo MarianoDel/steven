@@ -6,6 +6,6 @@ def index():
 
 
 if __name__ == '__main__':
-    run()
+    run(host='192.168.0.4', port=8080)
 
 

@@ -20,6 +20,7 @@ def posted():
 
 
 if __name__ == '__main__':
-    run(debug=True, reloader=True)
+    run(host='192.168.0.4', port=8080,
+        debug=True, reloader=True)
 
 

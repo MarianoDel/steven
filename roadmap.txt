@@ -1,0 +1,46 @@
+
+## Configurar Editor de texto para el entorno de programacion
+
+   #crear archivo .emacs de configuracion     //16-08-17
+
+   #activar paquetes			      //16-08-17
+
+
+
+## Activar Git (control de versiones)
+
+   #conseguir transferir archivos por github	//16-08-17
+
+   #emacs_use.txt                               //16-08-17
+
+   #activar entorno o repositorio para cosas de steven  //16-08-17
+
+   #armar en todas las maquinas git_use.txt     //16-08-17
+
+
+
+## Activar el entorno python                    //16-08-17
+   #usa easy_install
+
+
+
+## Desarroll mini-pagina web
+
+   #Apuntar con link por ahora
+
+
+## Desarrollo base de datos Mongo-db
+
+   #instalacion mongodb
+
+   #prueba simple con mongo
+
+
+
+## Activar AP por wifi raspberry
+
+
+
+## Redirigir  todas los conexiones directamente a la web
+
+
