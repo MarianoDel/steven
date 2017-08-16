@@ -1,0 +1,64 @@
+### Installing Slackware on RP3
+#http://rpi.fatdog.eu/index.php?p=installer
+
+$ fdisk -l
+
+Disk /dev/sdb: 15.1 GiB, 16191062016 bytes, 31623168 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0xf7ee0e18
+
+Device     Boot Start      End  Sectors  Size Id Type
+/dev/sdb1  *      184 31623167 31622984 15.1G  c W95 FAT32 (LBA)
+
+/dev/sdb1	es la microSD
+
+$ xz -dc sarpi3-installer_slackcurrent_fd0.img.xz | dd of=/dev/sdb1 bs=65536
+o
+$ xz -dc sarpi3-installer_slackcurrent_fd0.img.xz | dd of=/dev/sdb1 bs=32768
+
+
+#para dar formato
+mkdosfs -I -F32 device_name		// ex. /dev/sdb1
+
+###ARMO TODO CON FDISK
+Command (m for help): p
+Disk /dev/sdb: 14.4 GiB, 15489564672 bytes, 30253056 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0xcd169534
+
+Device     Boot Start      End  Sectors  Size Id Type
+/dev/sdb1        2048    67583    65536   32M  b W95 FAT32
+/dev/sdb2       67584 30253055 30185472 14.4G 83 Linux
+
+$ mkfs.vfat /dev/sdb1
+$ mkfs.ext4 /dev/sdb2		//tarda un poco
+
+#en el directorio
+$ git clone https://github.com/raspberrypi/firmware.git
+
+#### lo anterior lo corte porque era muy largo, arme la imagen desde windows y funciono
+http://rpi.fatdog.eu/index.php?p=sdconfig#sd_windows
+
+baje la imagen y utilice 7zip, porque el de winzip no funcionaba, grabe en la memoria el .img
+archivo:
+http://rpi.fatdog.eu/index.php?p=downloads
+current, hard float
+tira error out of memory, voy a cambiar swap a 1G
+
+########################################################################
+########vamos de nuevo con otra memoria 15-08-17
+desde windows con win32diskimager cargo slackware current hard
+
+#arranca ok
+seteo fecha y conexion de red
+
+#ping ok
+seteo nuevas particiones al mmcblk0
+
+#print ok

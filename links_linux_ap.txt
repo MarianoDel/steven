@@ -1,0 +1,36 @@
+## usar Linux como AP
+
+###haciendolo solo con iwconfig
+#http://oob.freeshell.org/nzwireless/hostap.html
+
+###con hostapd (interesante como prueba driver para ver capacidad)
+#https://prahladyeri.wordpress.com/2013/05/26/how-to-turn-your-linux-machine-into-a-wifi-access-point/
+(i) Find your kernel driver module in use by issuing the below command:
+lspci -k | grep -A 3 -i “network”
+
+(ii) Now, use the below command to find out your wifi capabilities (replace ath9k by your kernel driver):
+modinfo ath9k | grep ‘depend’
+(iii) If the above output includes “mac80211” then it means your wifi card will support the AP mode.
+
+###sin hostapd
+#http://www.enterprisenetworkingplanet.com/netsysm/article.php/3467111/Build-A-LinuxBased-Wireless-Access-Point-Part-2.htm
+
+The SSID (service set identifier) of the example access point is Northpasture, because that is the view out my window. SSIDs can be up to 32 characters and are case-sensitive.
+
+Debian Configuration
+Debian provides several ways to configure wireless adapters. The simplest is to use /etc/network/interfaces. Add this entry, using your own network addresses and ESSID:
+
+auto eth1
+iface eth1 inet static
+address 192.168.1.5
+network 192.168.1.0
+netmask 255.255.255.0
+broadcast 192.168.1.255
+gateway 192.168.1.1
+wireless_essid Northpasture
+wireless_mode Master
+
+You can put any iwconfig command in this file, in the format wireless_[command] [value], except nick.
+
+###con hostapd	(interesante paso a paso)
+#http://xmodulo.com/raspberry-pi-wifi-access-point.html

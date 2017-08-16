@@ -1,0 +1,5 @@
+##Links para Slackware en RP3
+
+https://docs.slackware.com/howtos:hardware:arm:raspberrypi3
+
+http://rpi.fatdog.eu/index.php?p=sysconfig
