@@ -1,0 +1,264 @@
+### Comandos más comunes de Git y GitHub ###
+
+COMMIT CHANGES
+
+git status		#muestra el estado del proyecto y sus commit
+git add –A		#agrega a la lista de files to track –A (todos) * --all
+git commit –m “nuevos cambios”	#hace el commit de la PC local
+
+git push origin		#pasa el commit al server GITHUB (solo si lo esta siguiendo)
+#si no sigo al server
+git push origin master	#nombre del branch a subir (sin seguimiento)
+git push –u origin master	#nombre del branch a subir (con seguimiento)
+				#despues me va a permitir usar git push origin solo
+
+
+#para borrar archivos adjuntados (git add) antes de un commit
+git rm –r *.lst –f		#borra recursivamente todos los archives .lst
+
+#para borrar archivos después del commit
+#si están en el server GITHUB voy a tener que hacer git pull y luego git commit
+#o sino git push origin –-delete  y borrar el branch
+
+BRANCHES
+
+git branch		//lista los branches del proyecto
+git branch –r		//lista branches remotos del proyecto (GITHUB)
+git branch –a		//lista todos los branches activos del proyecto
+
+#comparo branches
+git diff master..new_feature
+
+#para ver si un branch contiene toda la info de los otros
+git branch --merged
+
+#cambio el nombre de un branch
+git branch --move new_feature feature2
+
+#borrar branch de la PC local
+git branch --delete branch_to_delete
+git branch -D branch_to_delete		#otra forma
+
+
+#borrar branch del server (GITHUB)
+git push origin --delete branch_to_delete
+
+Crear Branches
+
+git checkout master		#voy al branch principal
+git branch new_feature1	#creo el nuevo branch llamado new_feature1
+git branch			#muestro los branches del proyeto
+
+Cambiar entre Branches
+
+git checkout new_feature1	#cambio context a branch new_feature1
+git checkout master		#vuelvo al context del master
+git branch			#muestro los branches del proyeto
+
+Si pierdo el master o queda dañado y puedo recuperar versiones anteriores
+
+git log –-oneline		#busco las claves SHA que me sirven (los commit anteriores)
+git checkout 0f345be	#voy al commit del branch que me interesa revisar
+git branch master_bkp	#creo un bkp desde el commit anterior
+git checkout master_bkp	#voy al bkp y reviso que este como quiero
+git branch –D master	#borro el master original
+git branch master		#creo el nuevo master con el código de master_bkp
+git checkout master		#reviso que tenga lo que quiero
+
+
+
+
+
+Mandar Branch local a GitHub
+
+git push -u origin master			#el nombre del branch que quiera subir
+git push -–set-upstream origin new_feature1	#otra forma
+git branch –r				#muestro los branches remotos del proyeto
+
+LOG
+
+git help log		#muestra ayuda del comando
+git log –n 3		#muestra últimos 3 logs
+git log --since=2016-03-29		#logs desde una fecha
+git log --grep="compila"		#muestra los commit con la palabra compila en el msg
+git log --graph --oneline --decorate –-all	#lista todos los commit y quién los hizo
+							#además me muestra la punta de cada branch
+git log –-oneline -3	#muestra en modo oneline solo los últimos 3
+
+
+MERGE
+
+git checkout master		#generalmente hago merge contra el master
+git diff master..new_feature1	#puedo ver diferencias antes del merge
+git merge new_feature1	#hago el merge al master desde new_feature1
+git merge –-no-ff new_feature1	#hago el merge pero no fast forw entonces genera un log
+git merge –-ff-only new_feature1	#hago el merge solo si es fast forward
+
+
+
+
+Conflictos con el merge
+
+#si tengo conflictos, cambios en el mismo archivo y no los puede resolver va a mostrar
+(master | MERGE) y tengo que resolver a mano o cancelar merge
+git merge –-abort
+
+#en el archivo con conflicto voy a ver
+<<<<<<<<<<<< HEAD
+texto
+============
+texto
+>>>>>>>>>>>> new_feature
+
+edito como lo quiero, borro los marcadores luego
+git status
+git add .
+git commit
+
+Cambiar o revisar versiones anteriores
+
+git log		#muestra commit anteriores con clave SHA
+git log –-oneline	#muestra commit en una linea
+git checkout ab101234ff	#cambio al branch anterior con la clave SHA (con 10 chars alcanza)
+git diff master..ab101234ff	#comparo con versión anterior
+
+USOS CON GITHUB
+
+##en la PC
+git remote			//me dice si conoce el server remoto
+git remote add origin https://github.com/MarianoDel/eclipse_vapore_panel.git
+
+git remote			//ahora deberia figurar origin
+cat .git/config		//info guardada en la PC
+cat .git/HEAD			//info del branch activo (adonde apunta HEAD)
+
+
+#si quiero borrar el acceso al repositorio remoto
+git remote rm origin
+
+#para subir al server el branch
+git push -u origin master	//o el nombre del branch que quiera subir
+
+#cada tanto tira un error de configuración por cambio de versiones de git 1.7 -> 2.0
+git config --global push.default matching
+
+
+CLONE -- GITHUB
+
+buscar el repositorio y copiar direccion https
+en la PC ir al directorio base
+git clone https://github.com/kevin/explore.git	#va a crear una carpeta explore con todos los archivos
+
+git clone https://github.com/kevin/explore.git explore_local_pc #va a crear una carpeta explore_local_pc con todos los archivos
+
+git fetch	#me sincroniza con el github repo (sobre todo si no soy el unico colaborador)
+		#pero no lo pone en master sino en origin/master o eclipse_planolux_p1/master
+
+#ahora tengo que hacer un merge
+git merge origin/master
+
+#puedo hacer un pull
+git pull	#que es igual a git fetch | git merge
+Borrar repositorio remoto
+
+git branch –r						#me muestra los repo remotos
+git push origin --delete new_feature1	#borro el brach new_feature1 remoto
+git branch -r
+
+Borrar archivos del repositorio remoto
+git pull origin			#primero sicronizar si no esta todavia
+git rm –r *.bak –f			#borro archivos .bak locales
+git commit –m “borre todos los .bak”	#hago el commit con los borrados
+git push origin			#en el server van a desaparecer los .bak
+
+USOS MAS COMUNES – Nuevo Proyecto
+#cuando armo un nuevo proyecto (en eclipse por ejemplo) generalmente copio uno existente
+#CUIDADO con no salir desde un branch en vez de un master
+#borrar el .git en caso de que exista porque va a estar apuntado a otro proyecto
+#si existe .gitignore lo dejo tal cual
+rm –r –f .git
+
+#creo el nuevo repositorio en github sin README.md (ej eclipse_planolux_p4)
+#copio la dirección https del repositorio
+
+#empiezo un nuevo seguimiento con git, agrego archivos, hago el primer commit
+git init
+git add –-all
+git commit –m “first commit”
+
+
+#reviso el README.md que va a ser lo que muestre el repositorio, lo modifico si necesito
+cat README.md
+
+#activo el apuntador al repositorio remoto con la dirección https copiada mas arriba
+git remote add eclipse_planolux_p4 https://github.com/MarianoDel/eclipse_planolux_p4.git
+
+#ahora hago el primer backup remote
+git push –u eclipse_planolux_p4 master
+USOS MAS COMUNES – PATCH (MERGE DE SOLO UN ARCHIVO)
+#cuando tengo 2 branches A y B, resuelven cosas distintas pero el archivo f es común a los #dos, en B se cambia f, pero sería útil tenerlo en A también. Entonces debo hacer un merge de #solo f en A desde B.
+git checkout A
+git checkout –-patch B f
+
+#agregar solo un archivo
+git checkout A
+git checkout B f
+
+#otro modo, en A tengo el trabajo actual, en B el archivo nuevo que quiero
+git checkout A
+git checkout	-b tempAB
+git merge B			#hago el merge en tempAB desde B
+git log			#copio la clave SHA1 del merge
+git checkout A
+git checkout 7e65enjfk file.txt
+
+USOS MAS COMUNES – COMPARAR ARCHIVOS DE DIFERENTES BRANCHES
+#comparo archivo main.c en branches master y pre_cert
+git diff master pre_cert -- ./src/main.c
+
+#comparo archivo main.c en branches master y log antiguo (uso los primeros num hash)
+git diff master 8d55754d965 -- ./src/main.c
+
+
+USOS MAS COMUNES – MERGE DE UN ARCHIVO AGREGANDO O MANTENIENDO LINEAS
+#solo f en A desde B.
+git checkout A
+git checkout –-patch B f		#el flag –patch habilita las siguientes opciones del merge
+
+y - stage this hunk
+n - do not stage this hunk
+q - quit; do not stage this hunk nor any of the remaining ones
+a - stage this hunk and all later hunks in the file
+d - do not stage this hunk nor any of the later hunks in the file
+g - select a hunk to go to
+/ - search for a hunk matching the given regex
+j - leave this hunk undecided, see next undecided hunk
+J - leave this hunk undecided, see next hunk
+k - leave this hunk undecided, see previous undecided hunk
+K - leave this hunk undecided, see previous hunk
+s - split the current hunk into smaller hunks
+e - manually edit the current hunk
+? - print help
+
+#con ‘s’ Split, ‘n’ no, y ‘y’ yes voy eligiendo como quiero aplicar el merge
+
+USOS MAS COMUNES – GUARDAR DATOS DE UN ARCHIVO ANTES DE NUEVO BRANCH Y MERGE
+#cuando voy a cambiar de branch y hago merge con el master, pierdo todo el soft del original, si quiero respetar parte de ese código, puedo realizar el merge con Split del punto anterior o armar un archivo main_bkp.c por ejemplo que no va a pisar el merge.
+
+
+
+
+
+
+
+
+
+
+MANUAL ONLINE
+https://git-scm.com/book/en/v2/Git-Commands-Email
+LISTA RAPIDA DE COMANDOS
+https://gist.github.com/hofmannsven/6814451
+
+VIDEOS EN GENERAL QUE SEGUI PARA EL USO DE ESTAS HERRAMIENTAS
+
+https://www.youtube.com/playlist?list=PLb5HO8RZjX-kZnThtY4f4yKgb2CQWwh8c
