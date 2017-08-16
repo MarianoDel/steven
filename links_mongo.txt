@@ -1,6 +1,10 @@
 #youtube
 mongodb y bottle
 
+#instala mongodb; usa el comando mongo (poquito) desde el shell; se conecta con pymongo para python; bottle
+% mongo 2.33
+% pymongo 7.00
+% mongo 12.00
 https://www.youtube.com/watch?v=ClAQEARNUoQ
 
 https://www.youtube.com/watch?v=e6UVjONLHgM&t=2s
