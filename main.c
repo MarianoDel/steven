@@ -9,7 +9,7 @@
 // Access from ARM Running Linux
 
 //#define BCM2708_PERI_BASE        0x20000000		//for RP1
-#define BCM2708_PERI_BASE        0x3F0000000			//for RP2 & RP3
+#define BCM2708_PERI_BASE        0x3F000000			//for RP2 & RP3
 #define GPIO_BASE                (BCM2708_PERI_BASE + 0x200000) /* GPIO controller */
 
 
