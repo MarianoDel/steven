@@ -1,11 +1,18 @@
+
 from bottle import run, route
+import os
+
 
 @route('/')
 def index():
-    return '<h1>  Hello STEVEN!</h1>'
+    usercall = str(os.geteuid())
+    return '<h1>  Hello STEVEN! runnig script as: ' + usercall + ' </h1>'
 
 
 if __name__ == '__main__':
-    run(host='192.168.0.4', port=8080)
+    if os.geteuid() == 0:
+        run(host='192.168.0.4', port=80)
+    else:
+        run(host='192.168.0.4', port=8080)
 
 
