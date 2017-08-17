@@ -1,0 +1,17 @@
+# Existen algunas Bibliotecas en C para los GPIO de la rasp[berry
+
+www.airspayce.com/mikem/bcm2835         //libreria bcm2835 para incluir como header
+
+
+elinux.org/RPI_GPIO_Code_Samples        //escribe registros directo del procesador con llamadas a sistema
+//compilar con gcc -O0 main.c
+//es un codigo bastante dificil de entender
+//mejor explicacion puede estar en www.pieter-jan.com/node/15
+
+
+wiringpi.com                            //similar a Arduino
+
+# todos los ejemplos con y sin librerias estan en elinux.org/RPI_GPIO_Code_Samples
+
+
+

@@ -1,4 +1,12 @@
+## Cargar sistema oerativo en micro SD
 
+   #instalacion sistema basico y configuracion de red
+   (no funciono la SD!!!)                         //14-08-17
+   #nueva instalacion de 0 en otra SD (clase 4)   //15-08-17
+
+   #carga de paquetes de soft                     //15-08-17
+   
+   
 ## Configurar Editor de texto para el entorno de programacion
 
    #crear archivo .emacs de configuracion     //16-08-17
@@ -35,6 +43,14 @@
 
    #prueba simple con mongo
 
+
+## Bibliotecas para los pines I/O de raspberry (C y Python)   
+
+   #prueba funcional Output (con osciloscopio)      //17-08-17   
+
+   #prueba funcional Input (con osciloscopio)
+
+   #prueba funcional PWM (no creo que se necesite)
 
 
 ## Activar AP por wifi raspberry
