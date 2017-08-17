@@ -46,7 +46,7 @@
 
 ## Bibliotecas para los pines I/O de raspberry (C y Python)   
 
-   #prueba funcional Output (con osciloscopio)
+   #prueba funcional Output (con osciloscopio)      //17-08-17   
 
    #prueba funcional Input (con osciloscopio)
 

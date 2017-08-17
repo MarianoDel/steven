@@ -1,3 +1,4 @@
+
 // Direct register access
 //  How to access GPIO registers from C-code on the Raspberry-Pi
 //  Example program
@@ -15,7 +16,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <fcntl.h> 
+#include <fcntl.h>
 #include <sys/mman.h>
 #include <unistd.h>
 
@@ -42,10 +43,7 @@ volatile unsigned *gpio;
 #define GPIO_PULL *(gpio+37) // Pull up/pull down
 #define GPIO_PULLCLK0 *(gpio+38) // Pull up/pull down clock
 
-//--- Module Function ---//
 void setup_io();
-void UDelay (void);
-
 
 void printButton(int g)
 {
@@ -57,65 +55,50 @@ void printButton(int g)
 
 int main(int argc, char **argv)
 {
-  int g,i;
+  int g,rep;
 
   // Set up gpi pointer for direct register access
-  printf("setting up...\n");
-  //  sleep(1);
-  setup_io();       //ONLY AS ROOT
+  printf("seting up...");
+  setup_io();
 
-    // Set GPIO pins 7-11 to output
+  // Switch GPIO 7..11 to output mode
+
+ /************************************************************************\
+  * You are about to change the GPIO settings of your computer.          *
+  * Mess this up and it will stop working!                               *
+  * It might be a good idea to 'sync' before running this program        *
+  * so at least you still have your code changes written to the SD-card! *
+ \************************************************************************/
+
+  // Set GPIO pins 7-11 to output
   for (g=7; g<=11; g++)
   {
     INP_GPIO(g); // must use INP_GPIO before we can use OUT_GPIO
     OUT_GPIO(g);
   }
 
-  printf("toggling leds...\n");
-
-  for (i=0; i<10000; i++)
+  for (rep=0; rep<10; rep++)
   {
      for (g=7; g<=11; g++)
      {
        GPIO_SET = 1<<g;
-       //       sleep(1);
+       sleep(1);
      }
-     //     UDelay();
-     usleep(1000);
-     
      for (g=7; g<=11; g++)
      {
        GPIO_CLR = 1<<g;
-       //       sleep(1);
+       sleep(1);
      }
-     //UDelay();
-     usleep(1000);
   }
 
-  printf("setting down...\n");
-  
- 
   return 0;
 
 } // main
 
-void UDelay (void)
-{
-  long int i;
-
-  for (i=0; i<20000; i++)
-    {
-      asm volatile (
-                    " nop\n "
-                    " nop\n "
-                    " nop ");
-    }
-
-}
 
 //
 // Set up a memory regions to access GPIO
-// ONLY AS ROOT
+//
 void setup_io()
 {
    /* open /dev/mem */
