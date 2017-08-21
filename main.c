@@ -71,6 +71,10 @@ int main(int argc, char **argv)
 
   printf("setting down...\n");
 
+
+  //No need /dev/mem anymore
+  unmap_peripheral(&gpio);
+
   return 0;
 
 } // main

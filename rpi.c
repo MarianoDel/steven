@@ -34,8 +34,6 @@ int map_peripheral(struct bcm2835_peripheral *p)
 
    p->addr = (volatile unsigned int *)p->map;
 
-	//No need /dev/mem anymore
-	unmap_peripheral(p);
 
    return 0;
 }
