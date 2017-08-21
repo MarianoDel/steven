@@ -21,6 +21,10 @@
 #if defined RPI2 || defined RPI3
 #define BCM2708_PERI_BASE		0x3F000000
 #define GPIO_BASE					(BCM2708_PERI_BASE + 0x200000)	// GPIO controller. Maybe wrong. Need to be tested.
+#define PWM_BASE					(BCM2708_PERI_BASE + 0x20C000)	// PWM controller. Maybe wrong. Need to be tested.
+#define CLK_BASE					(BCM2708_PERI_BASE + 0x101000)	// CLK controller. Maybe wrong. Need to be tested.
+#define DRIVER_BASE				(BCM2708_PERI_BASE + 0x100000)	// Drive Strenght controller. Maybe wrong. Need to be tested.
+#define TIMER_BASE				(BCM2708_PERI_BASE + 0x00B000)	// Timer controller. Maybe wrong. Need to be tested.
 #define BSC0_BASE					(BCM2708_PERI_BASE + 0x804000)	// I2C controller
 #endif
 
@@ -112,6 +116,7 @@ struct bcm2835_peripheral {
 //--- Exported functions ---//
 int map_peripheral(struct bcm2835_peripheral *p);
 void unmap_peripheral(struct bcm2835_peripheral *p);
+int map_all_know_peripheral(unsigned int *, unsigned int *, unsigned int *, unsigned int *);
 
 void GpioConfig_0_to_9 (unsigned int , unsigned int);
 void GpioConfig_10_to_19 (unsigned int , unsigned int);

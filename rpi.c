@@ -8,6 +8,8 @@
 
 //Externals
 extern struct bcm2835_peripheral gpio;
+extern struct bcm2835_peripheral pwm;
+extern struct bcm2835_peripheral clk;
 
 // Exposes the physical address defined in the passed structure using mmap on /dev/mem
 int map_peripheral(struct bcm2835_peripheral *p)
@@ -34,6 +36,27 @@ int map_peripheral(struct bcm2835_peripheral *p)
 
    p->addr = (volatile unsigned int *)p->map;
 
+
+   return 0;
+}
+
+// Exposes the physical address defined in the passed structure using mmap on /dev/mem
+int map_all_know_peripheral(unsigned int *p_gpio, unsigned int *p_pwm, unsigned int *p_driver, unsigned int *p_timer)
+{
+	unsigned int fd;
+   // Open /dev/mem
+   if ((fd = open("/dev/mem", O_RDWR|O_SYNC) ) < 0) {
+      printf("Failed to open /dev/mem, try checking permissions.\n");
+      return -1;
+   }
+
+   p_gpio = (volatile unsigned int *) mmap (NULL, BLOCK_SIZE, PROT_READ|PROT_WRITE, MAP_SHARED, fd, GPIO_BASE);
+
+   if (p_gpio == MAP_FAILED)
+	{
+		perror("mmap");
+      return -1;
+   }
 
    return 0;
 }

@@ -17,7 +17,14 @@
 // Externals ----
 // int  mem_fd;
 // void *gpio_map;
-struct bcm2835_peripheral gpio = {GPIO_BASE};
+struct bcm2835_peripheral gpio = {GPIO_BASE};	//old
+
+volatile unsigned int *pgpio ;			//new ones
+volatile unsigned int *pwm ;
+volatile unsigned int *clk ;
+volatile unsigned int *pads ;
+
+
 
 // Globals ------
 struct bcm2835_peripheral bsc0 = {BSC0_BASE};
@@ -47,7 +54,8 @@ int main(int argc, char **argv)
   // Set up gpi pointer for direct register access
   printf("setting up...\n");
 
-  if(map_peripheral(&gpio) == -1)  //ONLY AS ROOT
+//  if(map_peripheral(&gpio) == -1)  //ONLY AS ROOT
+  if(map_all_know_peripheral(pgpio, pwm, pads, clk) == -1)  //ONLY AS ROOT
   {
 	  printf("Failed to map the physical GPIO registers into the virtual memory space.\n");
 	  return -1;
