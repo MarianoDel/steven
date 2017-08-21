@@ -7,145 +7,121 @@
 
 
 // Access from ARM Running Linux
-
-//#define BCM2708_PERI_BASE        0x20000000		//for RP1
-#define BCM2708_PERI_BASE        0x3F000000			//for RP2 & RP3
-#define GPIO_BASE                (BCM2708_PERI_BASE + 0x200000) /* GPIO controller */
-
-
 #include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h> 
-#include <sys/mman.h>
+// #include <stdlib.h>
+// #include <fcntl.h>
+// #include <sys/mman.h>
 #include <unistd.h>
+#include "rpi.h"
 
-#define PAGE_SIZE (4*1024)
-#define BLOCK_SIZE (4*1024)
+// Externals ----
+// int  mem_fd;
+// void *gpio_map;
+struct bcm2835_peripheral gpio = {GPIO_BASE};
 
-int  mem_fd;
-void *gpio_map;
-
-// I/O access
-volatile unsigned *gpio;
+// Globals ------
+struct bcm2835_peripheral bsc0 = {BSC0_BASE};
 
 
-// GPIO setup macros. Always use INP_GPIO(x) before using OUT_GPIO(x) or SET_GPIO_ALT(x,y)
-#define INP_GPIO(g) *(gpio+((g)/10)) &= ~(7<<(((g)%10)*3))
-#define OUT_GPIO(g) *(gpio+((g)/10)) |=  (1<<(((g)%10)*3))
-#define SET_GPIO_ALT(g,a) *(gpio+(((g)/10))) |= (((a)<=3?(a)+4:(a)==4?3:2)<<(((g)%10)*3))
-
-#define GPIO_SET *(gpio+7)  // sets   bits which are 1 ignores bits which are 0
-#define GPIO_CLR *(gpio+10) // clears bits which are 1 ignores bits which are 0
-
-#define GET_GPIO(g) (*(gpio+13)&(1<<g)) // 0 if LOW, (1<<g) if HIGH
-
-#define GPIO_PULL *(gpio+37) // Pull up/pull down
-#define GPIO_PULLCLK0 *(gpio+38) // Pull up/pull down clock
+// // I/O access
+// volatile unsigned *gpio;
+//
 
 //--- Module Function ---//
-void setup_io();
-void UDelay (void);
+// void setup_io();
+// void UDelay (void);
 
 
-void printButton(int g)
-{
-  if (GET_GPIO(g)) // !=0 <-> bit is 1 <- port is HIGH=3.3V
-    printf("Button pressed!\n");
-  else // port is LOW=0V
-    printf("Button released!\n");
-}
+// void printButton(int g)
+// {
+//   if (GET_GPIO(g)) // !=0 <-> bit is 1 <- port is HIGH=3.3V
+//     printf("Button pressed!\n");
+//   else // port is LOW=0V
+//     printf("Button released!\n");
+// }
 
 int main(int argc, char **argv)
 {
-  int g,i;
+  int i;
 
   // Set up gpi pointer for direct register access
   printf("setting up...\n");
-  //  sleep(1);
-  setup_io();       //ONLY AS ROOT
 
-    // Set GPIO pins 7-11 to output
-  for (g=7; g<=11; g++)
+  if(map_peripheral(&gpio) == -1)  //ONLY AS ROOT
   {
-    INP_GPIO(g); // must use INP_GPIO before we can use OUT_GPIO
-    OUT_GPIO(g);
+	  printf("Failed to map the physical GPIO registers into the virtual memory space.\n");
+	  return -1;
   }
+
+  // Configuratin of pins IO
+  printf("configuring IOs...\n");
+
+  GpioConfig_0_to_9 (MASK_PIN9, MODE_PIN9_OUTPUT);
 
   printf("toggling leds...\n");
 
   for (i=0; i<10000; i++)
   {
-     for (g=7; g<=11; g++)
-     {
-       GPIO_SET = 1<<g;
-       //       sleep(1);
-     }
-     //     UDelay();
-     usleep(1000);
-     
-     for (g=7; g<=11; g++)
-     {
-       GPIO_CLR = 1<<g;
-       //       sleep(1);
-     }
-     //UDelay();
+	  GpioSet (PIN9);
+	  usleep(1000);
+
+	  GpioClear (PIN9);
      usleep(1000);
   }
 
   printf("setting down...\n");
-  
- 
+
   return 0;
 
 } // main
 
-void UDelay (void)
-{
-  long int i;
-
-  for (i=0; i<20000; i++)
-    {
-      asm volatile (
-                    " nop\n "
-                    " nop\n "
-                    " nop ");
-    }
-
-}
-
+// void UDelay (void)
+// {
+//   long int i;
 //
-// Set up a memory regions to access GPIO
-// ONLY AS ROOT
-void setup_io()
-{
-   /* open /dev/mem */
-   if ((mem_fd = open("/dev/mem", O_RDWR|O_SYNC) ) < 0) {
-      printf("can't open /dev/mem \n");
-      exit(-1);
-   }
-
-   /* mmap GPIO */
-   gpio_map = mmap(
-      NULL,             //Any adddress in our space will do
-      BLOCK_SIZE,       //Map length
-      PROT_READ|PROT_WRITE,// Enable reading & writting to mapped memory
-      MAP_SHARED,       //Shared with other processes
-      mem_fd,           //File to map
-      GPIO_BASE         //Offset to GPIO peripheral
-   );
-
-   close(mem_fd); //No need to keep mem_fd open after mmap
-
-   if (gpio_map == MAP_FAILED) {
-      printf("mmap error %d\n", (int)gpio_map);//errno also set!
-      exit(-1);
-   }
-
-   // Always use volatile pointer!
-   gpio = (volatile unsigned *)gpio_map;
-
-
-} // setup_io
+//   for (i=0; i<20000; i++)
+//     {
+//       asm volatile (
+//                     " nop\n "
+//                     " nop\n "
+//                     " nop ");
+//     }
+//
+// }
+//
+// //
+// // Set up a memory regions to access GPIO
+// // ONLY AS ROOT
+// void setup_io()
+// {
+//    /* open /dev/mem */
+//    if ((mem_fd = open("/dev/mem", O_RDWR|O_SYNC) ) < 0) {
+//       printf("can't open /dev/mem \n");
+//       exit(-1);
+//    }
+//
+//    /* mmap GPIO */
+//    gpio_map = mmap(
+//       NULL,             //Any adddress in our space will do
+//       BLOCK_SIZE,       //Map length
+//       PROT_READ|PROT_WRITE,// Enable reading & writting to mapped memory
+//       MAP_SHARED,       //Shared with other processes
+//       mem_fd,           //File to map
+//       GPIO_BASE         //Offset to GPIO peripheral
+//    );
+//
+//    close(mem_fd); //No need to keep mem_fd open after mmap
+//
+//    if (gpio_map == MAP_FAILED) {
+//       printf("mmap error %d\n", (int)gpio_map);//errno also set!
+//       exit(-1);
+//    }
+//
+//    // Always use volatile pointer!
+//    gpio = (volatile unsigned *)gpio_map;
+//
+//
+// } // setup_io
 
 // GPIO Pull Up/Pull Down Register Example
 //
