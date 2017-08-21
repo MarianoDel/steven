@@ -11,6 +11,8 @@ extern struct bcm2835_peripheral gpio;
 extern struct bcm2835_peripheral pwm;
 extern struct bcm2835_peripheral clk;
 
+extern volatile unsigned int *pgpio;
+
 // Exposes the physical address defined in the passed structure using mmap on /dev/mem
 int map_peripheral(struct bcm2835_peripheral *p)
 {
@@ -50,7 +52,8 @@ int map_all_know_peripheral(unsigned int *p_gpio, unsigned int *p_pwm, unsigned 
       return -1;
    }
 
-   p_gpio = (volatile unsigned int *) mmap (NULL, BLOCK_SIZE, PROT_READ|PROT_WRITE, MAP_SHARED, fd, GPIO_BASE);
+   //p_gpio = (volatile unsigned int *) mmap (NULL, BLOCK_SIZE, PROT_READ|PROT_WRITE, MAP_SHARED, fd, GPIO_BASE);
+	p_gpio = mmap (NULL, BLOCK_SIZE, PROT_READ|PROT_WRITE, MAP_SHARED, fd, GPIO_BASE);
 
    if (p_gpio == MAP_FAILED)
 	{
@@ -69,8 +72,12 @@ void unmap_peripheral(struct bcm2835_peripheral *p)
 
 void GpioConfig_0_to_9 (unsigned int pinmask, unsigned int mode)
 {
-	*(gpio.addr) &= pinmask;
-	*(gpio.addr) |= mode;
+	// *(gpio.addr) &= pinmask;
+	// *(gpio.addr) |= mode;
+
+	*pgpio &= pinmask;
+	*pgpio |= mode;
+
 }
 
 void GpioConfig_10_to_19 (unsigned int pinmask, unsigned int mode)
@@ -87,12 +94,14 @@ void GpioConfig_20_to_29 (unsigned int pinmask, unsigned int mode)
 
 void GpioSet (unsigned int pin)
 {
-	*(gpio.addr + 7) |= pin;
+	//*(gpio.addr + 7) |= pin;
+	*(pgpio + 7) |= pin;
 }
 
 void GpioClear (unsigned int pin)
 {
-	*(gpio.addr + 10) |= pin;
+	//*(gpio.addr + 10) |= pin;
+	*(pgpio + 10) |= pin;
 }
 
 // void dump_bsc_status() {
