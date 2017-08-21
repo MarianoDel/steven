@@ -62,3 +62,12 @@ seteo fecha y conexion de red
 seteo nuevas particiones al mmcblk0
 
 #print ok
+
+#para lograr correr X Window
+en /etc/X11 borre todos los archivos xorg.conf que habia
+(desde 0 no deberia haber ninguno)
+
+como root
+cd /boot/config.txt
+cambiar gpu-mem=256
+startx
