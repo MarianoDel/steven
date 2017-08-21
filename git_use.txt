@@ -249,7 +249,7 @@ USOS MAS COMUNES – GUARDAR DATOS DE UN ARCHIVO ANTES DE NUEVO BRANCH Y MERGE
 #para no poner tan seguido el passw
 en el .gitconfig (del usuario) agregar
 [credential]
-        helpre = cache
+        helper = cache
 
 
 
