@@ -246,6 +246,10 @@ USOS MAS COMUNES – GUARDAR DATOS DE UN ARCHIVO ANTES DE NUEVO BRANCH Y MERGE
 #cuando voy a cambiar de branch y hago merge con el master, pierdo todo el soft del original, si quiero respetar parte de ese código, puedo realizar el merge con Split del punto anterior o armar un archivo main_bkp.c por ejemplo que no va a pisar el merge.
 
 
+#para no poner tan seguido el passw
+en el .gitconfig (del usuario) agregar
+[credential]
+        helpre = cache
 
 
 
