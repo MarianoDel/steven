@@ -81,7 +81,7 @@ int main(int argc, char **argv)
 
 
   //No need /dev/mem anymore
-  unmap_peripheral(&gpio);
+  //  unmap_peripheral(&gpio);
 
   return 0;
 
