@@ -116,7 +116,7 @@ struct bcm2835_peripheral {
 //--- Exported functions ---//
 int map_peripheral(struct bcm2835_peripheral *p);
 void unmap_peripheral(struct bcm2835_peripheral *p);
-int map_all_know_peripheral(unsigned int *, unsigned int *, unsigned int *, unsigned int *);
+int map_all_know_peripheral(void);
 
 void GpioConfig_0_to_9 (unsigned int , unsigned int);
 void GpioConfig_10_to_19 (unsigned int , unsigned int);

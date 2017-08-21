@@ -11,11 +11,9 @@ extern struct bcm2835_peripheral gpio;
 extern struct bcm2835_peripheral pwm;
 extern struct bcm2835_peripheral clk;
 
-<<<<<<< HEAD
-extern volatile unsigned int * pgpio;
-=======
+
 extern volatile unsigned int *pgpio;
->>>>>>> origin/master
+
 
 // Exposes the physical address defined in the passed structure using mmap on /dev/mem
 int map_peripheral(struct bcm2835_peripheral *p)
@@ -47,7 +45,8 @@ int map_peripheral(struct bcm2835_peripheral *p)
 }
 
 // Exposes the physical address defined in the passed structure using mmap on /dev/mem
-int map_all_know_peripheral(unsigned int *p_gpio, unsigned int *p_pwm, unsigned int *p_driver, unsigned int *p_timer)
+//int map_all_know_peripheral(unsigned int *p_gpio, unsigned int *p_pwm, unsigned int *p_driver, unsigned int *p_timer)
+int map_all_know_peripheral(void)
 {
 	unsigned int fd;
    // Open /dev/mem
@@ -56,14 +55,11 @@ int map_all_know_peripheral(unsigned int *p_gpio, unsigned int *p_pwm, unsigned 
       return -1;
    }
 
-<<<<<<< HEAD
-   p_gpio = mmap (NULL, BLOCK_SIZE, PROT_READ|PROT_WRITE, MAP_SHARED, fd, GPIO_BASE);
-=======
    //p_gpio = (volatile unsigned int *) mmap (NULL, BLOCK_SIZE, PROT_READ|PROT_WRITE, MAP_SHARED, fd, GPIO_BASE);
-	p_gpio = mmap (NULL, BLOCK_SIZE, PROT_READ|PROT_WRITE, MAP_SHARED, fd, GPIO_BASE);
->>>>>>> origin/master
+	pgpio = mmap (NULL, BLOCK_SIZE, PROT_READ|PROT_WRITE, MAP_SHARED, fd, GPIO_BASE);
 
-   if (p_gpio == MAP_FAILED)
+
+   if (pgpio == MAP_FAILED)
 	{
 		perror("mmap");
       return -1;
@@ -86,17 +82,10 @@ void unmap_peripheral(struct bcm2835_peripheral *p)
 
 void GpioConfig_0_to_9 (unsigned int pinmask, unsigned int mode)
 {
-<<<<<<< HEAD
-  //	*(gpio.addr) &= pinmask;
-  //	*(gpio.addr) |= mode;
-
-       	*pgpio &= pinmask;
-=======
 	// *(gpio.addr) &= pinmask;
 	// *(gpio.addr) |= mode;
 
 	*pgpio &= pinmask;
->>>>>>> origin/master
 	*pgpio |= mode;
 
 }

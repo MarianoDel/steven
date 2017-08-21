@@ -55,13 +55,16 @@ int main(int argc, char **argv)
   printf("setting up...\n");
 
 //  if(map_peripheral(&gpio) == -1)  //ONLY AS ROOT
-  if(map_all_know_peripheral(pgpio, pwm, pads, clk) == -1)  //ONLY AS ROOT
+//  if(map_all_know_peripheral(pgpio, pwm, pads, clk) == -1)  //ONLY AS ROOT
+  if(map_all_know_peripheral() == -1)  //ONLY AS ROOT
   {
 	  printf("Failed to map the physical GPIO registers into the virtual memory space.\n");
 	  return -1;
   }
 
   // Configuratin of pins IO
+  printf("gpio addr : %d\n", pgpio);
+  printf("gpio value : %d\n", *pgpio);
   printf("configuring IOs...\n");
 
   GpioConfig_0_to_9 (MASK_PIN9, MODE_PIN9_OUTPUT);
@@ -81,11 +84,9 @@ int main(int argc, char **argv)
 
 
   //No need /dev/mem anymore
-<<<<<<< HEAD
   //  unmap_peripheral(&gpio);
-=======
-//  unmap_peripheral(&pgpio);
->>>>>>> origin/master
+  //  unmap_peripheral(&pgpio);
+
 
   return 0;
 
