@@ -71,3 +71,7 @@ como root
 cd /boot/config.txt
 cambiar gpu-mem=256
 startx
+
+cambie a gpu-mem=512
+porque el screensaver me bloquea y a veces no arranca el X
+
