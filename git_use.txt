@@ -126,7 +126,7 @@ USOS CON GITHUB
 
 ##en la PC
 git remote			//me dice si conoce el server remoto
-git remote add origin https://github.com/MarianoDel/eclipse_vapore_panel.git
+git remote add origin https://github.com/xxxxxxxx.git
 
 git remote			//ahora deberia figurar origin
 cat .git/config		//info guardada en la PC
@@ -152,7 +152,7 @@ git clone https://github.com/kevin/explore.git	#va a crear una carpeta explore c
 git clone https://github.com/kevin/explore.git explore_local_pc #va a crear una carpeta explore_local_pc con todos los archivos
 
 git fetch	#me sincroniza con el github repo (sobre todo si no soy el unico colaborador)
-		#pero no lo pone en master sino en origin/master o eclipse_planolux_p1/master
+		#pero no lo pone en master sino en origin/master o xxxxxx/master
 
 #ahora tengo que hacer un merge
 git merge origin/master
@@ -178,7 +178,7 @@ USOS MAS COMUNES – Nuevo Proyecto
 #si existe .gitignore lo dejo tal cual
 rm –r –f .git
 
-#creo el nuevo repositorio en github sin README.md (ej eclipse_planolux_p4)
+#creo el nuevo repositorio en github sin README.md (ej eclipse_p4)
 #copio la dirección https del repositorio
 
 #empiezo un nuevo seguimiento con git, agrego archivos, hago el primer commit
@@ -191,10 +191,10 @@ git commit –m “first commit”
 cat README.md
 
 #activo el apuntador al repositorio remoto con la dirección https copiada mas arriba
-git remote add eclipse_planolux_p4 https://github.com/MarianoDel/eclipse_planolux_p4.git
+git remote add eclipse_p4 https://github.com/xxxxx/eclipse_p4.git
 
 #ahora hago el primer backup remote
-git push –u eclipse_planolux_p4 master
+git push –u eclipse_p4 master
 USOS MAS COMUNES – PATCH (MERGE DE SOLO UN ARCHIVO)
 #cuando tengo 2 branches A y B, resuelven cosas distintas pero el archivo f es común a los #dos, en B se cambia f, pero sería útil tenerlo en A también. Entonces debo hacer un merge de #solo f en A desde B.
 git checkout A

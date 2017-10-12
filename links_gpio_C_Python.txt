@@ -13,5 +13,16 @@ wiringpi.com                            //similar a Arduino
 
 # todos los ejemplos con y sin librerias estan en elinux.org/RPI_GPIO_Code_Samples
 
+### lo ultimo que estuve usando 29-08-17
 
+#para barcode reader
+http://www.rkblog.rk.edu.pl/w/p/controlling-keyboard-emulating-devices-pyusb/
 
+https://github.com/walac/pyusb/blob/master/docs/tutorial.rst
+
+#para pines GPIO y PWM
+http://www.pieter-jan.com/node/15
+
+https://github.com/WiringPi/WiringPi/blob/master/wiringPi/wiringPi.c
+
+http://elinux.org/RPi_GPIO_Code_Samples
