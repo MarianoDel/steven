@@ -13,6 +13,9 @@ extern struct bcm2835_peripheral clk;
 
 
 extern volatile unsigned int *pgpio;
+extern volatile unsigned int *ppwm;
+extern volatile unsigned int *pclk;
+extern volatile unsigned int *ppads;
 
 
 // Exposes the physical address defined in the passed structure using mmap on /dev/mem
@@ -55,15 +58,44 @@ int map_all_know_peripheral(void)
       return -1;
    }
 
+   //MAPING GPIOs
    //p_gpio = (volatile unsigned int *) mmap (NULL, BLOCK_SIZE, PROT_READ|PROT_WRITE, MAP_SHARED, fd, GPIO_BASE);
 	pgpio = mmap (NULL, BLOCK_SIZE, PROT_READ|PROT_WRITE, MAP_SHARED, fd, GPIO_BASE);
 
 
    if (pgpio == MAP_FAILED)
-	{
-		perror("mmap");
+   {
+     perror("mmap on gpio");
       return -1;
    }
+
+   //MAPING PWM
+      ppwm = mmap (NULL, BLOCK_SIZE, PROT_READ|PROT_WRITE, MAP_SHARED, fd, PWM_BASE);
+
+      if (ppwm == MAP_FAILED)
+   {
+     perror("mmap on pwm");
+      return -1;
+   }
+
+   //MAPING CLK FOR PWM
+   pclk = mmap (NULL, BLOCK_SIZE, PROT_READ|PROT_WRITE, MAP_SHARED, fd, CLK_BASE);
+
+   if (pclk == MAP_FAILED)
+   {
+     perror("mmap on clk");
+      return -1;
+   }
+
+   //MAPING DRIVER PADS
+   ppads = mmap (NULL, BLOCK_SIZE, PROT_READ|PROT_WRITE, MAP_SHARED, fd, DRIVER_BASE);
+
+   if (ppads == MAP_FAILED)
+   {
+     perror("mmap on driver pads");
+      return -1;
+   }
+
 
    return 0;
 }
@@ -92,8 +124,10 @@ void GpioConfig_0_to_9 (unsigned int pinmask, unsigned int mode)
 
 void GpioConfig_10_to_19 (unsigned int pinmask, unsigned int mode)
 {
-	*(gpio.addr + 1) &= pinmask;
-	*(gpio.addr + 1) |= mode;
+
+  *(pgpio + 1) &= pinmask;
+  *(pgpio + 1) |= mode;
+
 }
 
 void GpioConfig_20_to_29 (unsigned int pinmask, unsigned int mode)
@@ -104,14 +138,62 @@ void GpioConfig_20_to_29 (unsigned int pinmask, unsigned int mode)
 
 void GpioSet (unsigned int pin)
 {
-	//*(gpio.addr + 7) |= pin;
 	*(pgpio + 7) |= pin;
 }
 
 void GpioClear (unsigned int pin)
 {
-	//*(gpio.addr + 10) |= pin;
 	*(pgpio + 10) |= pin;
+}
+
+//----- From WiringPi.c -----//
+void SetPwm0 (unsigned int mode, unsigned int range, unsigned int clk_div)
+{
+  u_int32_t pwm_control;
+  clk_div &= 4095 ;
+  
+  GpioConfig_10_to_19 (MASK_PIN8, MODE_PIN8_ALT5);    //PIN18 to PWM0
+
+  //TODO: agregar mapeo a pines alternativos tipo wiring line 544
+  usleep(110);      //    delayMicroseconds (110) ;		// See comments in pwmSetClockWPi
+
+  *(ppwm + PWM_CONTROL) = PWM0_ENABLE | PWM0_MS_MODE;
+  usleep(10);
+
+  *(ppwm + PWM0_RANGE) = range;
+  usleep(10);
+
+  pwm_control = *(ppwm + PWM_CONTROL);		// preserve PWM_CONTROL
+
+// We need to stop PWM prior to stopping PWM clock in MS mode otherwise BUSY
+// stays high.
+
+  *(ppwm + PWM_CONTROL) = 0;				// Stop PWM
+
+// Stop PWM clock before changing divisor. The delay after this does need to
+// this big (95uS occasionally fails, 100uS OK), it's almost as though the BUSY
+// flag is not working properly in balanced mode. Without the delay when DIV is
+// adjusted the clock sometimes switches to very slow, once slow further DIV
+// adjustments do nothing and it's difficult to get out of this mode.
+
+  *(pclk + PWMCLK_CNTL) = BCM_PASSWORD | 0x01 ;	// Stop PWM Clock
+  usleep(110);			// prevents clock going sloooow
+
+    while ((*(pclk + PWMCLK_CNTL) & 0x80) != 0)	// Wait for clock to be !BUSY
+      usleep (1) ;
+
+    *(pclk + PWMCLK_DIV)  = BCM_PASSWORD | (clk_div << 12) ;
+
+    *(pclk + PWMCLK_CNTL) = BCM_PASSWORD | 0x11 ;	// Start PWM clock
+    *(ppwm + PWM_CONTROL) = pwm_control ;		// restore PWM_CONTROL
+
+    usleep(10);
+  
+}
+
+void Pwm0Data (unsigned int value)
+{
+  *(ppwm + PWM0_DATA) = value;	  //cargo valor al pwm
 }
 
 // void dump_bsc_status() {

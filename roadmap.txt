@@ -53,6 +53,15 @@
    #prueba funcional PWM (no creo que se necesite)
 
 
+
+## Pruebas hardware y software para SCANNER -BAR CODE READER - codigo de barras
+
+   #Utilizar script pyhton, docs
+   www.rkblog.rk.edu.pl/w/controlling-keyboard-emulyating-devices-pyusb/
+
+   github.com/walac/pyusb/blob/master/docs/tutorial.rst
+
+
 ## Activar AP por wifi raspberry
 
 
