@@ -1,4 +1,4 @@
-# Existen algunas Bibliotecas en C para los GPIO de la rasp[berry
+# Existen algunas Bibliotecas en C para los GPIO de la raspberry
 
 www.airspayce.com/mikem/bcm2835         //libreria bcm2835 para incluir como header
 
