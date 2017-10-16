@@ -20,9 +20,9 @@
 struct bcm2835_peripheral gpio = {GPIO_BASE};	//old
 
 volatile unsigned int *pgpio ;			//new ones
-volatile unsigned int *pwm ;
-volatile unsigned int *clk ;
-volatile unsigned int *pads ;
+volatile unsigned int *ppwm ;
+volatile unsigned int *pclk ;
+volatile unsigned int *ppads ;
 
 
 
@@ -68,19 +68,46 @@ int main(int argc, char **argv)
   printf("configuring IOs...\n");
 
   GpioConfig_0_to_9 (MASK_PIN9, MODE_PIN9_OUTPUT);
+  //GpioConfig_10_to_19 (MASK_PIN8, MODE_PIN8_OUTPUT);
 
   printf("toggling leds...\n");
+  
+  //  for (i=0; i<10000; i++)
+  //{
+  //	  GpioSet (PIN9);
+  //	  usleep(1000);
+  //
+  //	  GpioClear (PIN9);
+  // usleep(1000);
+  //}
 
-  for (i=0; i<10000; i++)
-  {
-	  GpioSet (PIN9);
-	  usleep(1000);
+   printf("configuring pwm...\n");
+      SetPwm0(0, 1024, 32);
+      Pwm0Data (512);
+      printf("pwm done\n");
+  
+  while (1)
+    {
+      //GpioSet (PIN9);
+          //GpioSet (PIN18);
+      //  usleep(1000);
+  
+      //  GpioClear (PIN9);
+          //GpioClear (PIN18);
+      //  usleep(1000);
+      for (i=0; i < 1024; i++)
+        {
+          Pwm0Data(i);
+          usleep(1000);
+        }
 
-	  GpioClear (PIN9);
-     usleep(1000);
-  }
+        for (i=1023; i > 0; i--)
+        {
+          Pwm0Data(i);
+          usleep(1000);
+        }
 
-  printf("setting down...\n");
+    }
 
 
   //No need /dev/mem anymore

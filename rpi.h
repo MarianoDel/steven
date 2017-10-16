@@ -31,6 +31,42 @@
 #define PAGE_SIZE			(4*1024)
 #define BLOCK_SIZE		(4*1024)
 
+//----- From WiringPi.c ----//
+// BCM Magic
+#define	BCM_PASSWORD		0x5A000000
+
+// PWM
+//	Word offsets into the PWM control region
+
+#define	PWM_CONTROL 0
+#define	PWM_STATUS  1
+#define	PWM0_RANGE  4
+#define	PWM0_DATA   5
+#define	PWM1_RANGE  8
+#define	PWM1_DATA   9
+
+//	Clock regsiter offsets
+
+#define	PWMCLK_CNTL	40
+#define	PWMCLK_DIV	41
+
+#define	PWM0_MS_MODE    0x0080  // Run in MS mode
+#define	PWM0_USEFIFO    0x0020  // Data from FIFO
+#define	PWM0_REVPOLAR   0x0010  // Reverse polarity
+#define	PWM0_OFFSTATE   0x0008  // Ouput Off state
+#define	PWM0_REPEATFF   0x0004  // Repeat last value if FIFO empty
+#define	PWM0_SERIAL     0x0002  // Run in serial mode
+#define	PWM0_ENABLE     0x0001  // Channel Enable
+
+#define	PWM1_MS_MODE    0x8000  // Run in MS mode
+#define	PWM1_USEFIFO    0x2000  // Data from FIFO
+#define	PWM1_REVPOLAR   0x1000  // Reverse polarity
+#define	PWM1_OFFSTATE   0x0800  // Ouput Off state
+#define	PWM1_REPEATFF   0x0400  // Repeat last value if FIFO empty
+#define	PWM1_SERIAL     0x0200  // Run in serial mode
+#define	PWM1_ENABLE     0x0100  // Channel Enable
+
+
 // IO Acces
 struct bcm2835_peripheral {
     unsigned long addr_p;
@@ -74,6 +110,9 @@ struct bcm2835_peripheral {
 #define MODE_PIN7_OUTPUT			0x00200000
 #define MODE_PIN8_OUTPUT			0x01000000
 #define MODE_PIN9_OUTPUT			0x08000000
+
+//PINMODE ALTERNATIVE
+#define MODE_PIN8_ALT5     0x02000000
 
 //PIN
 #define PIN0			0x00000001
@@ -124,6 +163,9 @@ void GpioConfig_20_to_29 (unsigned int , unsigned int);
 
 void GpioSet (unsigned int);
 void GpioClear (unsigned int);
+
+void SetPwm0 (unsigned int, unsigned int, unsigned int);
+void Pwm0Data (unsigned int);
 
 #endif
 //--- End ---//
