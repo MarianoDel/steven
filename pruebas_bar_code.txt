@@ -1,0 +1,3 @@
+lsusb
+
+Bus 001 Device 008: ID 05fe:1010 Chic Technology Corp. Optical Wireless
