@@ -25,10 +25,10 @@ def MainLoop ():
 
 	print "Abriendo Base de Datos..."
 	client = MongoClient()
-	if (client != None):
-		print "DB encontrada"
-	else:
-		print "No se encontro la Base, verificar si el proceso esta corriendo"
+	try:
+		client.admin.command('ismaster')
+	except ConnectionFailure:
+		print "No se encontro la Base, verificar si el proceso esta corriendo"		
 
 	print "Abriendo Puerto Serie..."
 	serial_port = serial.Serial(SERIAL_PORT, SERIAL_BAUD, timeout=None)

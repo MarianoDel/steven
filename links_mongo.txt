@@ -17,3 +17,5 @@ https://www.youtube.com/watch?v=jV8B24rSN5o
 
 #manual mongo
 http://api.mongodb.com/python/current/tutorial.html
+
+./opt/mongo/bin/mongod --journal
