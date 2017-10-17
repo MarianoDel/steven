@@ -12,7 +12,7 @@ PRODUCT_ID = 0x1010
 
 #DATOS DEL PUERTO SERIE
 #SERIAL_PORT = COM20				#para windows
-SERIAL_PORT = '/dev/ttAMA0'		#para linux
+SERIAL_PORT = '/dev/ttyAMA0'		#para linux
 SERIAL_BAUD = 9600
 
 def MainLoop ():
@@ -28,7 +28,7 @@ def MainLoop ():
 	try:
 		client.admin.command('ismaster')
 	except ConnectionFailure:
-		print "No se encontro la Base, verificar si el proceso esta corriendo"		
+		print "No se encontro la Base, verificar si el proceso esta corriendo"
 
 	print "Abriendo Puerto Serie..."
 	serial_port = serial.Serial(SERIAL_PORT, SERIAL_BAUD, timeout=None)
