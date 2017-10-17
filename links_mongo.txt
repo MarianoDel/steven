@@ -14,3 +14,6 @@ https://www.youtube.com/watch?v=N0Pd83eDt7s
 
 #para pagina web con estilo
 https://www.youtube.com/watch?v=jV8B24rSN5o
+
+#manual mongo
+http://api.mongodb.com/python/current/tutorial.html

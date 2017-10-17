@@ -26,3 +26,8 @@ http://www.pieter-jan.com/node/15
 https://github.com/WiringPi/WiringPi/blob/master/wiringPi/wiringPi.c
 
 http://elinux.org/RPi_GPIO_Code_Samples
+
+#para puerto serie en general lo levanta el sistema en:
+/dev/ttAMA0 o /dev/ttyS0
+#con pyserial
+s = serial.Serial('/dev/ttyACM0', 115200)  
