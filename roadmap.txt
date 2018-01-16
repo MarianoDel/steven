@@ -68,6 +68,8 @@
 
 ## Redirigir  todas los conexiones directamente a la web
 
+##instalo python3 16-01-18
+pruebas Qt
 
 ### POSIBILIDADES FUTURAS DEL PROYECTO (no para Proyecto Final)
 Con este esquema de funcinamiento surgen algunas posibilidades futuras

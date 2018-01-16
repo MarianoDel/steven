@@ -27,7 +27,7 @@ def MainLoop ():
 	client = MongoClient()
 	try:
 		client.admin.command('ismaster')
-	except ConnectionFailure:
+	except:
 		print "No se encontro la Base, verificar si el proceso esta corriendo"
 
 	print "Abriendo Puerto Serie..."
