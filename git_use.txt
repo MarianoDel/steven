@@ -28,6 +28,7 @@ git branch –a		//lista todos los branches activos del proyecto
 
 #comparo branches
 git diff master..new_feature
+git diff master..a19fe5032 src/main.c		#comparo branch master contra uno anterior solo archivo main.c
 
 #para ver si un branch contiene toda la info de los otros
 git branch --merged
