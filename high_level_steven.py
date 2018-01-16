@@ -27,7 +27,11 @@ def MainLoop ():
 	client = MongoClient()
 	try:
 		client.admin.command('ismaster')
+<<<<<<< HEAD
 	except:
+=======
+	except:		   
+>>>>>>> 61f08e6e271136c0093929d8d6af9ede6d1c390f
 		print "No se encontro la Base, verificar si el proceso esta corriendo"
 
 	print "Abriendo Puerto Serie..."
