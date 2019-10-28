@@ -76,3 +76,13 @@ cambie a gpu-mem=512
 porque el screensaver me bloquea y a veces no arranca el X
 
 #### FINALMENTE ERA UN PROBLEMA DE FUENTE 5V 0.7A LA CAMBIE POR 5V 2A
+
+#### INSTALO ADEMAS ALGO DE PYTHON DIRECTO DESDE SLACKBUILD.ORG ####
+instalo pip  (por ahi no necesitaba este pero bueno)
+instalo python3
+
+#esto me instala tambien pip3
+
+#instalo el PyQt5
+pip3 install python-qt5
+

@@ -1,0 +1,118 @@
+* ROADMAP DEL PROYECTO
+
+* PRIMERA ETAPA
+** Activar Raspberry Pi3
+*** Cargar sistema operativo en micro SD
+    - instalacion sistema basico y configuracion de red
+      (no funciono la SD!!!) 
+      14-08-17
+   
+    - nueva instalacion de 0 en otra SD (clase 4)   
+      15-08-17
+
+    - carga de paquetes de soft                     
+      15-08-17
+
+** Configurar Editor de texto para el entorno de programacion
+*** Crear archivo .emacs de configuracion
+    16-08-17
+
+*** Activar paquetes
+    16-08-17
+
+** Activar Git (control de versiones)
+*** Conseguir transferir archivos por github	
+    16-08-17
+
+*** Activar entorno o repositorio para cosas de steven  
+    16-08-17
+
+** Activar el entorno python
+   - usa easy_install 16-08-17
+
+
+** Pruebas hardware y software para SCANNER -BAR CODE READER - codigo de barras
+*** Utilizar script pyhton, docs
+    www.rkblog.rk.edu.pl/w/controlling-keyboard-emulyating-devices-pyusb/	
+    16-10-17
+
+    github.com/walac/pyusb/blob/master/docs/tutorial.rst
+    16-10-17
+
+
+** Activar AP por wifi raspberry
+** Redirigir  todas los conexiones directamente a la web
+** Instalacion python3
+   - instalo python3 para poder probar la biblioteca Qt
+   16-01-18
+   - pruebas Qt
+     20-01-18
+
+* SEGUNDA ETAPA
+** Desarroll mini-pagina web
+   - Elegir Flask o Bottle
+   - Apuntar con link por ahora
+*** Instalo Flask para pruebas 26-10-19
+
+
+** Desarrollo base de datos Mongo-db
+   - instalacion mongodb
+   - prueba simple con mongo
+
+* DOCUMENTACION GENERAL DEL PROYECTO
+** Bibliotecas para los pines I/O de raspberry (C y Python)
+   - prueba funcional Output (con osciloscopio)      
+     17-08-17
+   - prueba funcional Input (con osciloscopio)
+     17-08-17
+   - prueba funcional PWM (no creo que se necesite)	
+     13-10-17
+
+* FUNCIONAMIENTO DEL SOFTWARE / FIRMWARE
+  Se compone de 3 programas principales corriendo continuamente y programas auxiliares corriendo a demanda
+  Los 3 programas principales son: programa de lector, base de datos, server y pagina web
+
+** Programa de lector
+   Se encarga de la interface con el lector y le envia la informacion a la base de datos de lo leido
+   Se encarga de abrir y cerrar la tapa (junto con software adicional especifico)
+  
+** Base de datos
+   Se encarga de gurdar toda la informacion y hace de interface entre los 3 programas
+   Se encarga de formular los reportes encargados desde la pagina web
+  
+** Server Web
+   Se encarga de mostrar a los usuarios el estado de funcionamiento del sistema
+   Se encarga de mostrar los reportes requeridos por el usuario
+   Se encarga de adicionar y editar items segun el codigo de barras
+
+* HARDWARE ADICIONAL REQUERIDO
+  Se necesita mas desarrollo de hardware por los siguientes motivos
+  - hay que controlar la apertura y el cierre de la tapa desde la placa principal (raspberry)
+  - tendrían que disponerse 2 o 3 leds para mostrar apertura / cierre y estados de error de los mecanismos
+  - se necesita agregar un reloj de tiempo real ya que la placa no dispone de uno y no se puede asegurar
+    que se conecte a internet para conseguir el horario actualizado
+  - barrera optica para detectar el real deposito de los elementos???
+  - sensor ultrasonico para revisar el llenado del tacho??????
+
+* POSIBILIDADES FUTURAS DEL PROYECTO (no para Proyecto Final)
+** Con este esquema de funcinamiento surgen algunas posibilidades futuras
+   - Si el equipo se coloca en un hogar, podría por ejemplo reportar informacion de interes para la salud:
+   1. cantidad de calorias consumidas
+   2. cantidad de sodio consumido
+   3. etc
+
+   - Si el equipo se coloca en la calle podria realizar las siguientes tareas
+   1. reconocer el producto y abrir tapa de elemento reciclable o tapa de desecho convencional
+   2. se puede agregar un nuevo contenedor para plasticos aluminios, etc
+   3. se puede conocer informacion comercial de productos util para empresas
+   4. cantidad de producto o insercion del mismo segun la zona / barrio / ciudad
+   5. tipo de consumo de la zona (infromacion para competir u ofertar mejor)
+
+
+
+* Documentacion de uso diario
+*** Armar en todas las maquinas git_use.txt
+    16-08-17
+
+*** emacs_use.txt
+    16-08-17
