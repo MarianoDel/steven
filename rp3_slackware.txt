@@ -75,6 +75,8 @@ startx
 cambie a gpu-mem=512
 porque el screensaver me bloquea y a veces no arranca el X
 
+#### mejore a fuante 5V 0.7A por una de 5V 2A y ahora parece arrancar siempre X
+
 #### FINALMENTE ERA UN PROBLEMA DE FUENTE 5V 0.7A LA CAMBIE POR 5V 2A
 
 #### INSTALO ADEMAS ALGO DE PYTHON DIRECTO DESDE SLACKBUILD.ORG ####
