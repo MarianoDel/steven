@@ -253,7 +253,7 @@ will gladly write up more detailed responses.
    - usa easy_install 16-08-17
 
 
-** Pruebas hardware y software para SCANNER -BAR CODE READER - codigo de barras
+** Pruebas hardware y software para SCANNER -BARCODE READER - codigo de barras
 *** Utilizar script pyhton, docs
     www.rkblog.rk.edu.pl/w/controlling-keyboard-emulyating-devices-pyusb/
     16-10-17
@@ -270,6 +270,17 @@ will gladly write up more detailed responses.
    - pruebas Qt
      20-01-18
 
+*** DONE Desde Python3 Instalo RPi.GPIO
+    CLOSED: [2019-10-28 Mon 13:50]
+    # pip3 install RPi.GPIO
+
+*** DONE Desde Python3 Instalo PyUSB
+    CLOSED: [2019-10-28 Mon 14:01]
+    # pip3 install pyusb
+
+*** DONE Desde Python3 Instalo PyMongo
+    CLOSED: [2019-10-28 Mon 14:06]
+    # pip3 install pymongo
 
 * SEGUNDA ETAPA
 ** Desarroll mini-pagina web
