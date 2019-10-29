@@ -23,8 +23,8 @@ git rm –r *.lst –f		#borra recursivamente todos los archives .lst
 BRANCHES
 
 git branch		//lista los branches del proyecto
-git branch –r		//lista branches remotos del proyecto (GITHUB)
-git branch –a		//lista todos los branches activos del proyecto
+git branch -r		//lista branches remotos del proyecto (GITHUB)
+git branch -a		//lista todos los branches activos del proyecto
 
 #comparo branches
 git diff master..new_feature
