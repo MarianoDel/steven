@@ -45,7 +45,7 @@
 #define	PWM1_RANGE  8
 #define	PWM1_DATA   9
 
-//	Clock regsiter offsets
+//	Clock register offsets
 
 #define	PWMCLK_CNTL	40
 #define	PWMCLK_DIV	41
