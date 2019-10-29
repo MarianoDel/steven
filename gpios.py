@@ -7,12 +7,12 @@ import time
 ###########################################
 # Seteo Inicial de todos los GPIOs a usar #
 ###########################################
-LED_G = 18
-LED_R = 19
-BUZZER = 20
-SCANNER = 21
-TRASH_UP = 22
-TRASH_DWN = 18
+LED_G = 24
+LED_R = 23
+BUZZER = 25
+SCANNER = 18
+TRASH_UP = 15
+TRASH_DWN = 14
 
 def GpiosInit():
     GPIO.setwarnings(False)
@@ -97,6 +97,15 @@ def ScannerOff():
     GPIO.output(SCANNER, GPIO.LOW)
 
 
+def ScannerPulse(timer):
+    start_new_thread(ScannerPulse_Thread, (timer,))
+
+
+def ScannerPulse_Thread(timer):
+    ScannerOn()
+    time.sleep(timer)
+    ScannerOff()
+    
 ############
 # Trash Up #
 ############
