@@ -21,10 +21,20 @@ def MainLoop():
     loop_cnt = 0
     
     while break_loop != True:        
-        LedGreenOn()
-        time.sleep(3)
-        LedGreenOff()
-        time.sleep(3)
+        # gp.LedGreenOn()
+        # time.sleep(3)
+        # gp.LedGreenOff()
+        # time.sleep(3)
+        
+        # gp.BuzzerPulse(0.3)
+        # time.sleep(1)
+        
+        # gp.TrashUpPulse()
+        # time.sleep(1)
+
+        gp.TrashDwnPulse()
+        time.sleep(1)
+
         loop_cnt += 1
         if loop_cnt > 100:
             break_loop = True

@@ -12,7 +12,7 @@ LED_R = 19
 BUZZER = 20
 SCANNER = 21
 TRASH_UP = 22
-TRASH_DWN = 23
+TRASH_DWN = 18
 
 def GpiosInit():
     GPIO.setwarnings(False)
@@ -77,7 +77,7 @@ def BuzzerOff():
 
 
 def BuzzerPulse(timer):
-    start_new_thread(BuzzerPulse_Thread, timer)
+    start_new_thread(BuzzerPulse_Thread, (timer,))
 
 
 def BuzzerPulse_Thread(timer):
@@ -109,7 +109,7 @@ def TrashUpOff():
 
 
 def TrashUpPulse():
-    start_new_thread(TrashUpPulse_Thread)
+    start_new_thread(TrashUpPulse_Thread, ())
 
 
 def TrashUpPulse_Thread():
@@ -130,7 +130,7 @@ def TrashDwnOff():
 
 
 def TrashDwnPulse():
-    start_new_thread(TrashDwnPulse_Thread)
+    start_new_thread(TrashDwnPulse_Thread, ())
 
 
 def TrashDwnPulse_Thread():
