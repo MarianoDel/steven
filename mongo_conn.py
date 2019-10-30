@@ -11,11 +11,30 @@ def ConnMongo ():
     mydb = myclient["mydatabase"]
     mycol = mydb["customers"]
 
-    mydoc = mycol.find().sort("name")
+    return mycol
+
+
+
+def InsertOne (collection, index):
+    mydict = { "name": f"John{index}", "address": "Highway 37" }
+    x = collection.insert_one(mydict)
+
+
+def ShowCol (collection):
+    mydoc = collection.find().sort("name")
 
     for x in mydoc:
         print(x)
-    
+
 if __name__ == "__main__":
     print ("Intento conectar con Mongo")
-    ConnMongo()
+    mycol = ConnMongo()
+
+    print ("Agrego datos a collection")
+    for i in range(10):
+        InsertOne(mycol, i)
+
+    print ("Collection data")
+    ShowCol(mycol)
+
+    
