@@ -400,6 +400,9 @@ You can put any iwconfig command in this file, in the format wireless_[command] 
     - con el explorador apuntar al puerto 28017
       192.168.1.104:28017
 
+*** Debo bajar la version de Pymongo por problemas de compatibilidad
+    pip3 install pymongo==3.4.0
+
 * DOCUMENTACION GENERAL DEL PROYECTO
 
 
