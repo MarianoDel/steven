@@ -71,10 +71,13 @@ class Reader(object):
 
         if self.debug:
             print('Raw data', data)
-        return self.decode_raw_data(data)
+        # return self.decode_raw_data(data)
+        return data
 
     def decode_raw_data(self, raw_data):
         data = self.extract_meaningful_data_from_chunk(raw_data)
+        print ("meaningful")
+        print (type(data))
         return self.raw_data_to_keys(data)
 
     def extract_meaningful_data_from_chunk(self, raw_data):

@@ -58,10 +58,19 @@ def MainLoop():
     # Todo levantado me quedo mostrando codigo en consola #
     #######################################################
     print ("Paso a un Loop de Lectura de Codigos de Barras")
-    reader = BarCodeReader(0x05fe, 0x1010, 84, 6, should_reset=True, debug=True)
+    reader = BarCodeReader(0x05fe, 0x1010, 84, 6, should_reset=True, debug=False)
     reader.initialize()
     while True:
-        print(reader.read().strip())
+        raw_data = reader.read()
+        # print(raw_data)
+        processed_data = get_data_code(raw_data)
+        print(f'processed: {processed_data} size: {len(processed_data)}')
+
+        gp.TrashUpPulse()
+        time.sleep(5)
+        gp.TrashDwnPulse()
+        
+        
         
     reader.disconnect()
 
@@ -84,6 +93,26 @@ class BarCodeReader(reader.Reader):
     """
     pass
 
+
+def get_data_code (new_raw_data):
+    readed = ""
+    for i in range(len(new_raw_data)):
+        a = new_raw_data[i]
+        if a >= 30 and a < 40:
+            if a == 39:
+                code = 0
+            else:
+                code = a - 30 + 1
+
+            readed += str(code)
+
+    return readed
+
+
 if __name__ == "__main__":
     print ("Inicio Componentes")
     MainLoop()
+
+
+
+

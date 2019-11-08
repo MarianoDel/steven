@@ -27,10 +27,17 @@ def map_character(c):
     return keys_page[c]
 
 
-def chunk_data(data, chunks):
-    for i in xrange(0, len(data), chunks):
-        yield data[i:i + chunks]
+# def chunk_data(data, chunks):
+#     for i in xrange(0, len(data), chunks):
+#         yield data[i:i + chunks]
 
+
+def chunk_data(data, chunks):
+    # for i in xrange(0, len(data), chunks):
+    for i in range(0, len(data), chunks):
+        # print ("rango i:" + str(i))
+        yield data[i:i + chunks]
+        
 
 def raw_to_key(key):
     if key[0] == 2:
