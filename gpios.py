@@ -72,6 +72,18 @@ def LedRedToggle():
         GPIO.output(LED_R, GPIO.LOW)
 
 
+def LedRedToggleContinous():
+    start_new_thread(LedRedToggle_Thread, ())
+
+
+def LedRedToggle_Thread():
+    while True:
+        LedRedOn()
+        time.sleep(1.3)
+        LedRedOff()
+        time.sleep(0.7)
+
+
 ##########
 # Buzzer #
 ##########

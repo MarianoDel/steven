@@ -60,15 +60,19 @@ def MainLoop():
     print ("Paso a un Loop de Lectura de Codigos de Barras")
     reader = BarCodeReader(0x05fe, 0x1010, 84, 6, should_reset=True, debug=False)
     reader.initialize()
+
+    gp.LedRedToggleContinous()
     while True:
         raw_data = reader.read()
         # print(raw_data)
         processed_data = get_data_code(raw_data)
         print(f'processed: {processed_data} size: {len(processed_data)}')
 
+        gp.LedGreenOn()
         gp.TrashUpPulse()
         time.sleep(5)
         gp.TrashDwnPulse()
+        gp.LedGreenOff()
         
         
         
