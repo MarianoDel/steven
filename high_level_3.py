@@ -8,6 +8,7 @@ import RPi.GPIO as GPIO
 import time
 import gpios as gp
 from keyboard_alike import reader
+from mongo_conn import ConnMongo, InsertOne
     
 
 
@@ -48,6 +49,10 @@ def MainLoop():
         try:
             client.admin.command('ismaster')
             database_find = True
+
+            print ("Reconecto con Mongo")
+            myprod, mygarb = ConnMongo()
+
         except:
             print ("No se encontro la Base, verificar si el proceso esta corriendo")
             time.sleep(10)
@@ -70,6 +75,13 @@ def MainLoop():
 
         gp.LedGreenOn()
         gp.TrashUpPulse()
+
+        # guardo datos en la base
+        print ("Agrego datos a collection Desechos")
+        localtime = time.asctime( time.localtime(time.time()) )        
+        mydict = { "barcode": str(processed_data), "date": str(localtime) }
+        InsertOne(mygarb, mydict)
+
         time.sleep(5)
         gp.TrashDwnPulse()
         gp.LedGreenOff()

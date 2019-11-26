@@ -31,6 +31,20 @@ def ShowCol (collection):
     for x in mydoc:
         print(x)
 
+def ShowCol (collection):
+    # mydoc = collection.find().sort("name")
+    mydoc = collection.find({},{ "_id": 0, "producto": 1, "descripcion": 1 })
+
+    for x in mydoc:
+        print(x)
+
+def ShowGarbage (collection):
+    # mydoc = collection.find().sort("name")
+    mydoc = collection.find({},{ "_id": 0, "barcode": 1, "date": 1 })
+
+    for x in mydoc:
+        print(x)
+
 
 def DeleteOne (collection):
     myquery = { "address": "Mountain 21" }
@@ -59,7 +73,7 @@ if __name__ == "__main__":
     ShowCol(myprod)
 
     print ("Collection data for Desechos")
-    ShowCol(mygarb)
+    ShowGarbage(mygarb)
     
     
 
