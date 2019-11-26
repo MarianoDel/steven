@@ -7,7 +7,7 @@ from pymongo import MongoClient
 import time
 
 def ConnMongo ():
-    myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+    myclient = MongoClient("mongodb://localhost:27017/")
     mydb = myclient["mydatabase"]
     mycol_prod = mydb["productos"]
     mycol_des = mydb["desechos"]
