@@ -12,7 +12,7 @@ mycol_des = mydb["desechos"]
 
 @app.route('/garbage')
 def garbage():
-    return render_template('garbage.html')    #ubicar en carpeta template
+    return render_template('garbage.html', t='Basura', h='Todo lo desechado')    #ubicar en carpeta template
 
 @app.route('/')
 def index():
