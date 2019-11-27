@@ -14,7 +14,13 @@ mycol_des = mydb["desechos"]
 @app.route('/garbage')
 def garbage():
     desechos = mycol_des.find()
-    return render_template('garbage.html', t='Basura', h='Todo lo desechado', des=desechos)    #ubicar en carpeta template
+    return render_template('garbage.html', t='Basura', h='Todo lo desechado', des=desechos)
+
+@app.route('/last_month')
+def last_month():
+    desechos = mycol_des.find()
+    
+    return render_template('garbage.html', t='Basura', h='Todo lo desechado', des=desechos)
 
 @app.route('/')
 def index():
