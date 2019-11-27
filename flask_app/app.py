@@ -15,7 +15,8 @@ mycol_des = mydb["desechos"]
 def garbage():
     med = {'name':"maxi", 'desc':"agua", 'date':"hoy mismo", 'pr':"pr", 'done':"no"}
     # return render_template('garbage.html', marks=3)    #ubicar en carpeta template
-    return render_template('garbage.html', t='Basura', h='Todo lo desechado', todos=med, marks=3)    #ubicar en carpeta template
+    desechos = mycol_des.find()
+    return render_template('garbage.html', t='Basura', h='Todo lo desechado', des=desechos)    #ubicar en carpeta template
 
 @app.route('/')
 def index():

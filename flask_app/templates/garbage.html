@@ -10,26 +10,20 @@
   <hr>  
   <h3>Result of the Search : ToDO List</h3>
 
-  {% if marks>50 %}
-  <h1> Your result is pass!</h1>
-  {% else %}
-  <h1>Your result is fail</h1>
-  {% endif %}
-
   <table>
     <tr id="row">
-      <td class="name">Task Name</td>
-      <td class="desc">Task Description</td>
-      <td class="date">Date</td>
-      <td class="pr">Project</td>
+      <td class="id">ID</td>
+      <td class="codigo">Código</td>
+      <td class="fecha">Fecha</td>
     </tr>
 
+    {% for d in des %}
     <tr class="datas">
-      <td class="name">{{ todos["name"] }}</td>
-      <td class="desc">{{ todos["desc"] }}</td>
-      <td class="date">{{ todos["date"] }}</td>
-      <td class="pr">{{ todos["pr"] }}</td>
+      <td class="id">{{ d["_id"] }}</td>
+      <td class="codigo">{{ d["barcode"] }}</td>
+      <td class="fecha">{{ d["date"] }}</td>
     </tr>
+    {% endfor %}
 
   </table>
 
