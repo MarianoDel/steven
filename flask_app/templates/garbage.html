@@ -1,27 +1,47 @@
 <!doctype html>
 <html>  
-    <head>  
-        <title>{{t}}</title>  
-        <link rel="stylesheet" type="text/css"  href="{{ url_for('static',filename='gstyle.css')}}" >  
-    </head>  
-<body>  
-  <h1>{{h}}</h1>
+  <head>  
+    <title>{{t}}</title>
+    <style>
+      table {
+      border-collapse: collapse;
+      width: 100%;
+      }
 
-  <hr>  
-  <h3>Result of the Search : ToDO List</h3>
+      th {
+      text-align: left;
+      padding: 8px;
+      background-color: #4CAF50;
+      color: white;
+      }
+
+      td {
+      text-align: left;
+      padding: 8px;
+      }
+      
+      tr:nth-child(even) {background-color: #f2f2f2;}
+    </style>
+
+  </head>  
+  <body>  
+    <h1>{{h}}</h1>
+
+    <hr>  
+    <h3>Result of the Search : ToDO List</h3>
 
   <table>
-    <tr id="row">
-      <td class="id">ID</td>
-      <td class="codigo">Código</td>
-      <td class="fecha">Fecha</td>
+    <tr>
+      <th>DataBase ID</th>
+      <th>Codigo de Barras</th>
+      <th>Fecha del Desecho</th>
     </tr>
 
     {% for d in des %}
-    <tr class="datas">
-      <td class="id">{{ d["_id"] }}</td>
-      <td class="codigo">{{ d["barcode"] }}</td>
-      <td class="fecha">{{ d["date"] }}</td>
+    <tr>
+      <td>{{ d["_id"] }}</td>
+      <td>{{ d["barcode"] }}</td>
+      <td>{{ d["date"] }}</td>
     </tr>
     {% endfor %}
 
