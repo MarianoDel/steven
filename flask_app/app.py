@@ -10,9 +10,12 @@ mydb = myclient["mydatabase"]
 mycol_prod = mydb["productos"]
 mycol_des = mydb["desechos"]
 
+
 @app.route('/garbage')
 def garbage():
-    return render_template('garbage.html', t='Basura', h='Todo lo desechado')    #ubicar en carpeta template
+    med = {'name':"maxi", 'desc':"agua", 'date':"hoy mismo", 'pr':"pr", 'done':"no"}
+    # return render_template('garbage.html', marks=3)    #ubicar en carpeta template
+    return render_template('garbage.html', t='Basura', h='Todo lo desechado', todos=med, marks=3)    #ubicar en carpeta template
 
 @app.route('/')
 def index():

@@ -1,10 +1,38 @@
+<!doctype html>
 <html>  
     <head>  
         <title>{{t}}</title>  
         <link rel="stylesheet" type="text/css"  href="{{ url_for('static',filename='gstyle.css')}}" >  
     </head>  
 <body>  
-    <h1>{{h}}</h1>  
-    <a href="/">Return to Home</a>  
+  <h1>{{h}}</h1>
+
+  <hr>  
+  <h3>Result of the Search : ToDO List</h3>
+
+  {% if marks>50 %}
+  <h1> Your result is pass!</h1>
+  {% else %}
+  <h1>Your result is fail</h1>
+  {% endif %}
+
+  <table>
+    <tr id="row">
+      <td class="name">Task Name</td>
+      <td class="desc">Task Description</td>
+      <td class="date">Date</td>
+      <td class="pr">Project</td>
+    </tr>
+
+    <tr class="datas">
+      <td class="name">{{ todos["name"] }}</td>
+      <td class="desc">{{ todos["desc"] }}</td>
+      <td class="date">{{ todos["date"] }}</td>
+      <td class="pr">{{ todos["pr"] }}</td>
+    </tr>
+
+  </table>
+
+  <a href="/">Return to Home</a>  
 </body>  
 </html>
