@@ -64,11 +64,14 @@ if __name__ == "__main__":
     # mydict = { "producto": "agua", "descripcion": "eco de los andes con gas", "barcode": "77927799000035" }
     # InsertOne(myprod, mydict)
 
-    # mydict = { "producto": "sopa", "descripcion": "quick de pollo", "barcode": "7794000598584" }
-    # InsertOne(myprod, mydict)
+    mydict = { "producto": "Citric", "descripcion": "Jugo de Naranja 500ml", "barcode": "7798085680127" }
+    InsertOne(myprod, mydict)
 
-    # mydict = { "producto": "arvejas", "descripcion": "marolio tetra 340g", "barcode": "7797470007426" }
-    # InsertOne(myprod, mydict)
+    mydict = { "producto": "tic-tac", "descripcion": "Mix de Frutas 16g", "barcode": "7797394001265" }
+    InsertOne(myprod, mydict)
+    
+    mydict = { "producto": "Marolio", "descripcion": "Garbanzos Tetra 340g", "barcode": "7797470007907" }
+    InsertOne(myprod, mydict)
     
     print ("Collection data for Productos")
     ShowCol(myprod)

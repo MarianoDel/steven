@@ -490,3 +490,6 @@ You can put any iwconfig command in this file, in the format wireless_[command] 
 
    # corro el server de base de datos
    /opt/mongo/bin/mongod --journal --fork --logpath /var/log/mongodb.log
+
+   # corro webserver
+   /usr/bin/python3 /home/med/Documents/steven/flask_app/app.py &
