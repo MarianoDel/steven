@@ -38,7 +38,6 @@ def carrito():
             #creo la entrada
             mydict.update({barcode : 1})
 
-    
     print (mydict)
     for m in mydict:
         new_dict = { }
@@ -58,9 +57,8 @@ def carrito():
 
 @app.route('/clean_garbage')
 def clean_garbage():
-    desechos = mycol_des.find()
-
-    return render_template('garbage.html', t='Basura', h='Todo lo desechado', des=desechos)
+    desechos = mycol_des.drop()
+    return render_template('cleaned.html', t='Limpieza', h='Borrado con exito!!!')
 
 @app.route('/')
 def index():
