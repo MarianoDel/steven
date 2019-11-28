@@ -1,0 +1,54 @@
+<!doctype html>
+<html>  
+  <head>  
+    <title>{{t}}</title>
+    <style>
+      table {
+      border-collapse: collapse;
+      width: 100%;
+      }
+
+      th {
+      text-align: left;
+      padding: 8px;
+      background-color: #4CAF50;
+      color: white;
+      }
+
+      td {
+      text-align: left;
+      padding: 8px;
+      }
+      
+      tr:nth-child(even) {background-color: #f2f2f2;}
+    </style>
+
+  </head>  
+  <body>  
+    <h1>{{h}}</h1>
+
+    <hr>  
+    <h3>Result of the Search : Shopping Cart List</h3>
+
+  <table>
+    <tr>
+      <th>Codigo de Barras</th>
+      <th>Cantidad</th>
+      <th>Producto</th>
+      <th>Descripcion</th>
+    </tr>
+
+    {% for d in des %}
+    <tr>
+      <td>{{ d["barcode"] }}</td>
+      <td>{{ d["qtty"] }}</td>
+      <td>{{ d["producto"] }}</td>
+      <td>{{ d["descripcion"] }}</td>
+    </tr>
+    {% endfor %}
+
+  </table>
+
+  <a href="/">Return to Home</a>  
+</body>  
+</html>

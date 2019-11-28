@@ -80,6 +80,11 @@ def MainLoop():
         print ("Agrego datos a collection Desechos")
         localtime = time.asctime( time.localtime(time.time()) )        
         mydict = { "barcode": str(processed_data), "date": str(localtime) }
+        
+        # st = time.localtime(time.time())
+        # st_str =  f'{st.tm_year}-{st.tm_mon}-{st.tm_mday} {st.tm_hour}:{st.tm_min}'
+        # mydict = { "barcode": str(processed_data), "date": st_str }
+
         InsertOne(mygarb, mydict)
 
         time.sleep(5)

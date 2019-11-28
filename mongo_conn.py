@@ -33,7 +33,8 @@ def ShowCol (collection):
 
 def ShowCol (collection):
     # mydoc = collection.find().sort("name")
-    mydoc = collection.find({},{ "_id": 0, "producto": 1, "descripcion": 1 })
+    # mydoc = collection.find({},{ "_id": 0, "producto": 1, "descripcion": 1 })
+    mydoc = collection.find({},{ "_id": 0, "producto": 1, "descripcion": 1, "barcode": 1 })
 
     for x in mydoc:
         print(x)
